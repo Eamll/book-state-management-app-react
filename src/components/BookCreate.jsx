@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import BooksContext from "../context/books";
 
-function BookCreate({ onCreate }) {
+function BookCreate() {
   const [title, setTitle] = useState("");
+  const { createBook } = useContext(BooksContext);
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -10,7 +11,7 @@ function BookCreate({ onCreate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate(title);
+    createBook(title);
     setTitle("");
   };
 
@@ -30,9 +31,5 @@ function BookCreate({ onCreate }) {
     </div>
   );
 }
-
-BookCreate.propTypes = {
-  onCreate: PropTypes.func
-};
 
 export default BookCreate;
